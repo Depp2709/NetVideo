@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Platform</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin-top: 50px;
+        }
+        .video-container {
+            margin-bottom: 20px;
+        }
+        .video-container video {
+            width: 100%;
+            height: auto;
+        }
+        .upload-section {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center">Platform Video</h1>
+
+    <!-- Form Upload Video -->
+    <div class="upload-section">
+        <h3>Upload Video</h3>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" class="form-control" name="file" accept="video/*" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+
+    <!-- Daftar Video yang Di-upload -->
+    <div class="video-gallery">
+        <h3>Video yang Diupload</h3>
+        <div class="row">
+            {% for video in videos %}
+            <div class="col-md-4 video-container">
+                <video controls>
+                    <source src="{{ url_for('static', filename='videos/' + video) }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p class="text-center">{{ video }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
